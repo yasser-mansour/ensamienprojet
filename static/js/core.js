@@ -27,7 +27,11 @@ function appendChildren(el, children) {
 }
 
 export function mount(container, ...nodes) {
-  container.replaceChildren(...nodes.flat().filter(Boolean));
+  // Equivalent to replaceChildren(), which older iOS Safari (< 14) does not support.
+  while (container.firstChild) container.removeChild(container.firstChild);
+  for (const node of nodes.flat()) {
+    if (node) container.append(node);
+  }
 }
 
 export function getCookie(name) {

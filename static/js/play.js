@@ -259,7 +259,8 @@ function answerInput(q) {
 // --- MATCH ---------------------------------------------------------------
 
 function matchInput(q) {
-  const draft = (drafts[q.runtime_id] ||= { pairs: {} });
+  if (!drafts[q.runtime_id]) drafts[q.runtime_id] = { pairs: {} };
+  const draft = drafts[q.runtime_id];
   const submitBtn = h("button", { class: "btn btn--primary btn--xl btn--block", type: "button" }, "Submit matches");
   const refresh = () => {
     submitBtn.disabled = q.items.some((item) => !draft.pairs[item.key]);
@@ -294,7 +295,8 @@ function matchInput(q) {
 
 function orderInput(q) {
   const n = q.options.length;
-  const draft = (drafts[q.runtime_id] ||= { slots: Array(n).fill(null) });
+  if (!drafts[q.runtime_id]) drafts[q.runtime_id] = { slots: Array(n).fill(null) };
+  const draft = drafts[q.runtime_id];
   const wrap = h("div", { class: "stage", style: { gap: "10px" } });
   const submitBtn = h("button", { class: "btn btn--primary btn--xl btn--block", type: "button" }, "Lock in sequence");
   submitBtn.addEventListener("click", () => submit(q, { order: [...draft.slots] }, submitBtn));

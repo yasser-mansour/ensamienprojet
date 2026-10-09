@@ -105,8 +105,10 @@ network latency.
 ## 4. Not tested here (limitations)
 
 * **Real phones and Safari/iOS.** Only Chromium with mobile emulation was available in this
-  container. The code avoids non-Safari APIs (`<dialog>` needs iOS 15.4+), but test on a real
-  iPhone and a Samsung device during rehearsal.
+  container. The phone pages were audited for APIs that older iOS lacks: `replaceChildren`,
+  `||=` and `form.requestSubmit()` were replaced, so the team app targets iOS 13.4+ and Chrome on
+  Android. `<dialog>` (iOS 15.4+) is only used on the host dashboard (MacBook). Still test on a
+  real iPhone and a Samsung device during rehearsal.
 * **The real projector and classroom Wi-Fi.**
 * **The production deployment** (Heroku, DNS, TLS). Nothing was deployed.
 * Fonts: the container has no Arial Black / Arial Narrow, so the screenshots use fallback fonts.

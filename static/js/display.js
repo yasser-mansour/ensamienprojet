@@ -126,7 +126,7 @@ function updateLive() {
           h("div", { class: "d-team__name" }, t.name),
           h("div", { class: "d-team__st" }, t.connected ? "● CONNECTED" : "○ OFFLINE")));
     }));
-    document.getElementById("d-team-count").replaceChildren(h("b", null, String(state.teams.length)), ` / ${state.max_teams} TEAMS`);
+    mount(document.getElementById("d-team-count"), h("b", null, String(state.teams.length)), ` / ${state.max_teams} TEAMS`);
   }
   const subs = document.getElementById("d-subs");
   if (subs && state.submissions) {

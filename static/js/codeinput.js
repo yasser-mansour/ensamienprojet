@@ -40,7 +40,8 @@ boxes.forEach((box, i) => {
     else if (e.key === "ArrowRight" && i < boxes.length - 1) boxes[i + 1].focus();
     else if (e.key === "Enter") {
       e.preventDefault();
-      form.requestSubmit();
+      // requestSubmit() needs iOS 16+; clicking the submit button runs the same validation.
+      button.click();
     }
   });
   box.addEventListener("paste", (e) => {
