@@ -207,9 +207,11 @@ def main():
         time.sleep(1.0)
         st = action("next_question")
         if st["status"] == "MISSION_COMPLETE":
+            if "next_mission" not in st["allowed_actions"]:
+                st = action("finish_game")  # final mission played: show the final results
+                break
             st = action("next_mission")
-            if st["status"] == "MISSION_INTRO":
-                st = action("start_question")
+            st = action("start_question")
     if st["status"] == "QUESTION_OPEN":
         action("close_question")  # leave last question unscored and unrevealed
     remaining = a.duration - (time.time() - started)

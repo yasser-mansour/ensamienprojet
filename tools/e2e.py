@@ -191,6 +191,8 @@ class Run:
                 st = self.host_state()
                 if st["status"] == "MISSION_COMPLETE":
                     break
+            expect(self.display.locator(".d-board")).to_be_visible(timeout=5000)
+            time.sleep(2)
             self.shot(self.display, f"40-projector-mission-{mission['code']}-complete")
             self.verify_scores()
             if mission["order"] >= mission["total"]:
@@ -199,7 +201,7 @@ class Run:
 
         st = self.host_click(primary=True, expect_status="FINISHED")
         expect(self.display.locator(".d-final")).to_be_visible(timeout=8000)
-        time.sleep(1.5)
+        time.sleep(2.5)
         self.shot(self.display, "50-projector-final")
         self.shot(self.teams["ALPHA"][1], "51-phone-final")
         self.shot(self.host, "52-host-finished")
@@ -346,7 +348,8 @@ class Run:
         if q_index == 1:
             self.host_click("show_leaderboard", expect_status="LEADERBOARD")
             if mission_index == 1:
-                time.sleep(1.2)
+                expect(self.display.locator(".d-board")).to_be_visible(timeout=5000)
+                time.sleep(2)
                 self.shot(self.display, "25-projector-leaderboard")
                 self.shot(self.teams[first_team][1], "26-phone-leaderboard")
         self.host_click(primary=True)

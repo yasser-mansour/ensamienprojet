@@ -249,9 +249,9 @@ function revealScene() {
         h("div", { class: "d-results" }, results.map((t) => h("span", { class: `tag ${t.correct ? "tag--ok" : "tag--bad"}` }, `${t.correct ? "✓" : "✗"} ${t.name}`))))));
 }
 
-function boardRows(rows) {
+function boardRows(rows, compact = false) {
   const max = Math.max(1, ...rows.map((r) => r.score));
-  return h("div", { class: "d-board" }, rows.map((r, i) =>
+  return h("div", { class: `d-board ${compact ? "d-board--compact" : ""}` }, rows.map((r, i) =>
     h("div", { class: "d-board__row", style: { animationDelay: `${i * 0.08}s` } },
       h("span", { class: "d-board__rank" }, `#${r.rank}`),
       h("span", { class: "d-board__name" }, r.name),
@@ -261,9 +261,9 @@ function boardRows(rows) {
 
 function boardScene(eyebrow, title) {
   const rows = state.leaderboard || [];
-  return h("section", { class: "d-scene", style: { display: "grid", gridTemplateRows: "auto 1fr", gap: "1.6vw" } },
-    h("div", { style: { textAlign: "center" } }, h("p", { class: "d-eyebrow" }, eyebrow), h("h1", { class: "d-big" }, title)),
-    rows.length ? boardRows(rows) : h("p", { class: "d-intro__obj" }, "No teams"));
+  return h("section", { class: "d-scene", style: { display: "grid", gridTemplateRows: "auto minmax(0, 1fr)", gap: "1.4vw" } },
+    h("div", { style: { textAlign: "center" } }, h("p", { class: "d-eyebrow" }, eyebrow), h("h1", { class: "d-big", style: { fontSize: "3.8vw" } }, title)),
+    rows.length ? boardRows(rows, rows.length > 6) : h("p", { class: "d-intro__obj" }, "No teams"));
 }
 
 function finalScene() {
@@ -277,5 +277,5 @@ function finalScene() {
       h("div", { class: "d-winner__name d-big" }, winners.map((w) => w.name).join(" · ") || "—"),
       winners.length ? h("div", { class: "d-winner__score" }, `${winners[0].score} EP`) : null,
       h("p", { class: "d-intro__obj", style: { marginTop: "1.4vw" } }, "ENGINEERS CERTIFIED. THANK YOU, ENGINEERS.")),
-    boardRows(rows.slice(0, 10)));
+    boardRows(rows.slice(0, 10), true));
 }

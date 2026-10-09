@@ -496,6 +496,7 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
 .table th, .table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
 .table th { font-family: var(--font-narrow); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); font-weight: 400; }
 .table-wrap { overflow-x: auto; }
+.table td.mono { white-space: nowrap; }
 .cell-ok { color: var(--ok); }
 .cell-bad { color: var(--bad); }
 
@@ -602,6 +603,7 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
 .d-results .tag { font-size: 1vw; padding: 0.35vw 0.7vw; }
 
 .d-seq { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2vw; align-items: stretch; }
+.d-seq--reveal { gap: 3vw; }
 .d-seq__card {
   position: relative; padding: 1.6vw 1.4vw; min-height: 11vw;
   display: grid; align-content: space-between; gap: 1vw;
@@ -611,15 +613,15 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
 .d-seq__card .d-seq__key { color: var(--amber); font-size: 2.4vw; }
 .d-seq--reveal .d-seq__card { border-top-color: var(--ok); opacity: 0; animation: seqIn 0.6s var(--ease) forwards; }
 .d-seq--reveal .d-seq__card:not(:last-child)::after {
-  content: "→"; position: absolute; right: -1.15vw; top: 50%; transform: translate(50%, -50%);
-  color: var(--ok); font-size: 2.2vw; z-index: 2;
+  content: "→"; position: absolute; right: -1.5vw; top: 50%; transform: translate(50%, -50%);
+  color: var(--ok); font-size: 2.2vw; line-height: 1; z-index: 2;
 }
 .d-seq__step { font-family: var(--font-narrow); font-size: 1vw; letter-spacing: 0.22em; color: var(--ok); }
 @keyframes seqIn { from { opacity: 0; transform: translateX(-2vw); } to { opacity: 1; transform: none; } }
 
 .d-board { display: grid; gap: 0.7vw; max-width: 72vw; margin: 0 auto; width: 100%; }
 .d-board__row {
-  display: grid; grid-template-columns: 5vw 1fr 1fr 9vw; align-items: center; gap: 1.4vw;
+  display: grid; grid-template-columns: 5vw 1fr 1fr 11vw; align-items: center; gap: 1.4vw;
   padding: 0.9vw 1.4vw; background: var(--bg-2); border: 1px solid var(--line);
   animation: rise 0.5s var(--ease) both;
 }
@@ -628,13 +630,21 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
 .d-board__name { font-family: var(--font-display); font-size: 2vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .d-board__bar { height: 0.8vw; background: var(--panel-2); }
 .d-board__bar i { display: block; height: 100%; background: var(--amber); transform-origin: left; animation: grow 0.9s var(--ease) both; }
-.d-board__score { font-family: var(--font-mono); font-size: 2.2vw; font-weight: 700; text-align: right; }
+.d-board__score { font-family: var(--font-mono); font-size: 2.2vw; font-weight: 700; text-align: right; white-space: nowrap; }
+.d-board--compact { gap: 0.5vw; }
+.d-board--compact .d-board__row { grid-template-columns: 3.6vw 1fr 0.7fr 10vw; gap: 1vw; padding: 0.55vw 1.1vw; }
+.d-board--compact .d-board__rank { font-size: 1.7vw; }
+.d-board--compact .d-board__name { font-size: 1.5vw; }
+.d-board--compact .d-board__score { font-size: 1.6vw; }
+.d-board--compact .d-board__bar { height: 0.6vw; }
 @keyframes grow { from { transform: scaleX(0); } }
 
-.d-final { height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; align-items: center; }
-.d-winner { display: grid; gap: 1vw; }
-.d-winner__name { font-size: 6vw; line-height: 0.95; color: var(--amber); word-break: break-word; }
-.d-winner__score { font-family: var(--font-mono); font-size: 2.6vw; }
+.d-final { height: 100%; display: grid; grid-template-columns: 1fr 1.1fr; gap: 3vw; align-items: center; overflow: hidden; }
+.d-winner { display: grid; gap: 0.8vw; align-content: center; }
+.d-winner .d-big { font-size: 4.4vw; }
+.d-winner__name { font-size: 5vw !important; line-height: 0.95; color: var(--amber); overflow-wrap: anywhere; }
+.d-winner__score { font-family: var(--font-mono); font-size: 2.2vw; }
+.d-winner .d-intro__obj { font-size: 1.4vw; }
 
 .d-pause { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(14, 17, 22, 0.9); z-index: 5; }
 .d-pause h2 { font-size: 7vw; color: var(--amber); }

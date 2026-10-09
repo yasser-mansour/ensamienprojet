@@ -223,6 +223,7 @@ class SessionEvent(models.Model):
 
     class Meta:
         ordering = ["-created_at", "-id"]
+        indexes = [models.Index(fields=["session", "-created_at"], name="event_session_recent")]
         constraints = [
             models.UniqueConstraint(
                 fields=["session", "request_id"], condition=~Q(request_id=""), name="uniq_host_request_id"
