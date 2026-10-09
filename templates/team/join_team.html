@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Choose your team name{% endblock %}
+{% block body %}
+<div class="mobile">
+  <header class="mobile__top">
+    {% include "partials/brand.html" %}
+    <span class="tag">SESSION <span class="mono amber">{{ code }}</span></span>
+  </header>
+  <main class="mobile__main">
+    <p class="eyebrow">Access granted</p>
+    <h1 class="stage__big" style="margin:10px 0 28px">Welcome to<br>Energy Lab</h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if error %}<div class="alert" role="alert">{{ error }}</div>{% endif %}
+      <div class="field">
+        <label for="team_name">Choose your team name</label>
+        <input class="input input--big" id="team_name" name="team_name" value="{{ name }}" maxlength="{{ max_length }}" autocomplete="off" autocapitalize="characters" spellcheck="false" required autofocus placeholder="E.G. ALPHA">
+        <span class="dim" style="font-size:13px">Max {{ max_length }} characters · must be unique in this session</span>
+      </div>
+      <button class="btn btn--primary btn--xl btn--block" type="submit">Continue</button>
+    </form>
+    <p style="margin-top:28px;text-align:center">
+      <a href="{% url 'live:join_recover' %}" class="narrow" style="font-size:13px">Lost your phone? Reconnect an existing team</a>
+    </p>
+  </main>
+  <footer class="mobile__foot"><a href="{% url 'live:home' %}">← Different code</a></footer>
+</div>
+{% endblock %}

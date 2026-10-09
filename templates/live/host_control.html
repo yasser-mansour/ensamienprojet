@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Mission control · {{ session.code }}{% endblock %}
+{% block body %}
+<div class="host">
+  <header class="host-top">
+    {% include "partials/brand.html" %}
+    <div class="host-top__stats">
+      <div class="stat"><span class="stat__label">Session code</span><span class="stat__value stat__value--code">{{ session.code }}</span></div>
+      <div class="stat"><span class="stat__label">Status</span><span class="stat__value" id="top-status">—</span></div>
+      <div class="stat"><span class="stat__label">Teams connected</span><span class="stat__value mono" id="top-teams">—</span></div>
+      <div class="stat"><span class="stat__label">Current mission</span><span class="stat__value" id="top-mission">—</span></div>
+      <div class="stat"><span class="stat__label">Registration</span><span class="stat__value" id="top-reg">—</span></div>
+    </div>
+    <div class="host-top__actions">
+      <span class="status-strip"><span class="dot dot--wait" id="net-dot"></span><span id="net-text">SYNC</span></span>
+      <form method="post" action="{% url 'live:host_open_display' session.pk %}" target="ensamien-projector">
+        {% csrf_token %}<button class="btn btn--sm" type="submit" title="Opens the projector view in a separate window">Open projector ↗</button>
+      </form>
+      <a class="btn btn--sm btn--ghost" href="{% url 'live:host_report' session.pk %}" target="_blank" rel="noopener">Report</a>
+      <a class="btn btn--sm btn--ghost" href="{% url 'live:host_dashboard' %}">Dashboard</a>
+    </div>
+  </header>
+  <div class="hazard"></div>
+
+  <main class="host-grid">
+    <div class="host-col">
+      <section class="panel"><div class="panel__body" style="padding:10px"><div class="missions-strip" id="missions"></div></div></section>
+
+      <section class="panel corners">
+        <div class="panel__head">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <h2 class="phase-title" id="phase-title">Loading…</h2>
+            <span id="phase-tags" style="display:flex;gap:6px;flex-wrap:wrap"></span>
+          </div>
+          <span class="dim narrow" style="font-size:12px" id="phase-hint"></span>
+        </div>
+        <div class="panel__body stage-grid">
+          <div id="stage-main"></div>
+          <div class="gauge" id="stage-gauge"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__head"><span class="panel__title">Controls</span><span class="dim narrow" style="font-size:12px" id="action-feedback" aria-live="polite"></span></div>
+        <div class="panel__body controls">
+          <div class="controls__primary">
+            <button class="btn btn--primary btn--xl" id="primary-action" type="button">—</button>
+            <button class="btn btn--xl" data-action="pause" type="button">Pause</button>
+          </div>
+          <div class="controls__row">
+            <button class="btn" data-action="start_game" type="button">Start game</button>
+            <button class="btn" data-action="start_question" type="button">Start question</button>
+            <button class="btn" data-action="close_question" type="button">Close question</button>
+            <button class="btn" data-action="reveal_answer" type="button">Reveal answer</button>
+          </div>
+          <div class="controls__row">
+            <button class="btn" data-action="show_leaderboard" type="button">Show leaderboard</button>
+            <button class="btn" data-action="next_question" type="button">Next question</button>
+            <button class="btn" data-action="next_mission" type="button">Next mission</button>
+            <button class="btn" data-action="resume" type="button">Resume</button>
+          </div>
+          <div class="controls__row">
+            <button class="btn" data-action="extend_time" data-params='{"seconds":15}' type="button">+15 s</button>
+            <button class="btn" data-action="reopen_question" data-params='{"seconds":15}' type="button">Reopen (15 s)</button>
+            <button class="btn" data-action="skip_question" data-confirm="Skip this question? No points will be awarded for it." type="button">Skip question</button>
+            <button class="btn" data-action="restart_mission" data-confirm="Restart the current mission from its introduction? Points already awarded are kept and will not be awarded twice." type="button">Restart mission</button>
+          </div>
+          <div class="controls__row">
+            <button class="btn btn--ghost" id="reg-toggle" type="button">Registration</button>
+            <button class="btn btn--ghost" data-action="toggle_speed_bonus" id="speed-toggle" type="button">Speed bonus</button>
+            <button class="btn btn--danger" data-action="finish_game" data-confirm="Finish the game now? The final leaderboard will be shown and no more answers will be accepted." type="button">Finish game</button>
+            <button class="btn btn--danger" data-action="archive" data-confirm="Archive this finished session? It stays in the history." type="button">Archive</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__head"><span class="panel__title">Session event log</span></div>
+        <div class="log" id="event-log"></div>
+      </section>
+    </div>
+
+    <aside class="host-col">
+      <section class="panel">
+        <div class="panel__head"><span class="panel__title">Teams</span><span class="mono" id="team-count">0 / 10</span></div>
+        <div id="team-table"></div>
+      </section>
+      <section class="panel">
+        <div class="panel__head"><span class="panel__title">Leaderboard</span></div>
+        <div id="leaderboard" class="panel__body" style="padding:10px"></div>
+      </section>
+      <section class="panel" id="join-panel">
+        <div class="panel__head"><span class="panel__title">Join instructions</span></div>
+        <div class="panel__body">
+          <div class="mono" style="font-size:15px">{{ public_url }}</div>
+          <div class="dim" style="font-size:13px;margin-top:6px">Code <span class="mono amber">{{ session.code }}</span> · lost phone → team menu → recovery code</div>
+        </div>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<dialog id="confirm-dialog">
+  <form method="dialog">
+    <div class="dialog__body"><h3 class="dialog__title" id="confirm-title">Are you sure?</h3><p class="muted" id="confirm-text" style="margin:0"></p></div>
+    <div class="dialog__actions"><button class="btn btn--ghost" value="cancel">Cancel</button><button class="btn btn--primary" value="ok" id="confirm-ok">Confirm</button></div>
+  </form>
+</dialog>
+
+<dialog id="team-dialog">
+  <form method="dialog" id="team-form">
+    <div class="dialog__body">
+      <h3 class="dialog__title" id="team-dialog-title">Team</h3>
+      <div class="field" style="margin:0">
+        <label for="adj-points">Adjust score (EP)</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn btn--sm" type="button" data-preset="50">+50</button>
+          <button class="btn btn--sm" type="button" data-preset="100">+100</button>
+          <button class="btn btn--sm" type="button" data-preset="300">+300</button>
+          <button class="btn btn--sm" type="button" data-preset="-100">−100</button>
+        </div>
+        <input class="input" id="adj-points" type="number" step="10" min="-1000" max="1000" placeholder="e.g. 100 or -100">
+      </div>
+      <div class="field" style="margin:0">
+        <label for="adj-reason">Reason</label>
+        <input class="input" id="adj-reason" maxlength="120" list="reason-list" placeholder="e.g. Excellent explanation">
+        <datalist id="reason-list"><option value="Excellent explanation"><option value="Speaking participation"><option value="Engineering design challenge"><option value="Good teamwork"><option value="Scoring correction"></datalist>
+      </div>
+      <button class="btn btn--primary" type="button" id="adj-submit">Apply score change</button>
+      <div style="border-top:1px solid var(--line);padding-top:14px;display:grid;gap:8px">
+        <span class="stat__label">Device recovery</span>
+        <button class="btn" type="button" id="recovery-btn">Issue recovery code</button>
+        <div id="recovery-out" hidden>
+          <div class="recovery-code" id="recovery-code"></div>
+          <p class="dim" style="font-size:13px;margin:8px 0 0">Valid for 10 minutes, once. On the new phone: enter the session code → “Reconnect an existing team”.</p>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--line);padding-top:14px">
+        <button class="btn btn--danger btn--block" type="button" id="remove-btn">Remove team & reopen slot</button>
+      </div>
+    </div>
+    <div class="dialog__actions"><button class="btn btn--ghost" value="close">Close</button></div>
+  </form>
+</dialog>
+{% endblock %}
+{% block scripts %}
+<script type="module" src="{% static 'js/host.js' %}" id="host-script"
+  data-state-url="{% url 'live:api_host_state' session.pk %}"
+  data-action-url="{% url 'live:api_host_action' session.pk %}"
+  data-login-url="{% url 'accounts:login' %}"></script>
+{% endblock %}

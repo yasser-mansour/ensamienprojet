@@ -1,0 +1,11 @@
+<header class="host-top">
+  {% include "partials/brand.html" %}
+  <nav class="host-top__stats" aria-label="Host">
+    <a class="narrow" href="{% url 'live:host_dashboard' %}" style="font-size:13px">Dashboard</a>
+    <a class="narrow" href="{% url 'live:host_history' %}" style="font-size:13px">Session history</a>
+  </nav>
+  <div class="host-top__actions">
+    <span class="dim narrow" style="font-size:12px">{{ request.user.email }}</span>
+    <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button class="btn btn--sm btn--ghost" type="submit">Sign out</button></form>
+  </div>
+</header>

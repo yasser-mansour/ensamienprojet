@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Session history{% endblock %}
+{% block body %}
+{% include "live/_host_nav.html" %}
+<main class="page">
+  <div class="page-head"><div><p class="eyebrow">Archive</p><h1 style="font-size:40px;margin-top:6px">Session history</h1></div></div>
+  {% if sessions %}
+  <div class="panel table-wrap">
+    <table class="table">
+      <thead><tr><th>Created</th><th>Code</th><th>Status</th><th>Teams</th><th>Started</th><th>Finished</th><th></th></tr></thead>
+      <tbody>
+      {% for s in sessions %}
+      <tr>
+        <td>{{ s.created_at|date:"d M Y · H:i" }}</td><td class="mono">{{ s.code }}</td><td>{{ s.get_status_display }}</td><td>{{ s.team_count }}</td>
+        <td>{{ s.started_at|date:"H:i"|default:"—" }}</td><td>{{ s.finished_at|date:"H:i"|default:"—" }}</td>
+        <td style="white-space:nowrap"><a href="{% url 'live:host_report' s.pk %}">Report</a>{% if s.status != "FINISHED" and s.status != "ARCHIVED" %} · <a href="{% url 'live:host_control' s.pk %}">Control</a>{% endif %}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}<div class="panel empty">No sessions yet</div>{% endif %}
+</main>
+{% endblock %}

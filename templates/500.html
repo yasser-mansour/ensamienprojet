@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Server error{% endblock %}
+{% block body %}
+<div class="mobile"><header class="mobile__top">{% include "partials/brand.html" %}</header>
+<main class="mobile__main"><p class="eyebrow">Error 500</p><h1 class="stage__big" style="margin:10px 0 18px">Something went wrong</h1>
+<p class="muted">Please try again in a moment. Your team and score are saved on the server.</p><p><a class="btn btn--primary" href="/">Reload</a></p></main></div>
+{% endblock %}

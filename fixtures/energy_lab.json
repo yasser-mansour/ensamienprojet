@@ -1,0 +1,398 @@
+{
+  "experience": {
+    "slug": "energy-lab",
+    "title": "ENERGY LAB LIVE",
+    "subtitle": "CRASH TEST #05",
+    "source_reference": "Career Paths: Engineering, Book 1 (Lloyd & Frazier, Express Publishing 2011), Unit 5 — Energy, pp. 12–13"
+  },
+  "missions": [
+    {
+      "order": 1,
+      "code": "01",
+      "slug": "energy-scan",
+      "title": "ENERGY SCAN",
+      "objective": "Distinguish potential energy from kinetic energy.",
+      "briefing": "Read each situation. Still and in position, or moving? Lock in one answer for your company.",
+      "default_duration": 20,
+      "questions": [
+        {
+          "kind": "SINGLE",
+          "label": "SITUATION 1 / 5",
+          "context": "A ball is held still on a high shelf.",
+          "prompt": "What energy does it have?",
+          "options": ["POTENTIAL ENERGY", "KINETIC ENERGY", "POTENTIAL, THEN KINETIC"],
+          "answer_key": "A",
+          "answer_display": "POTENTIAL ENERGY",
+          "explanation": "Still object → potential energy. The textbook rule (Task 3): “A still object has potential energy.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 1 · built on Textbook Task 3 (still = potential, moving = kinetic)"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "SITUATION 2 / 5",
+          "context": "A car is driving along a highway.",
+          "prompt": "What energy does it have?",
+          "options": ["POTENTIAL ENERGY", "KINETIC ENERGY", "POTENTIAL, THEN KINETIC"],
+          "answer_key": "B",
+          "answer_display": "KINETIC ENERGY",
+          "explanation": "Moving object → kinetic energy. The textbook rule (Task 3): “A moving object has kinetic energy.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 1 · built on Textbook Task 3 (still = potential, moving = kinetic)"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "SITUATION 3 / 5",
+          "context": "A football is flying across the pitch.",
+          "prompt": "What energy does it have?",
+          "options": ["POTENTIAL ENERGY", "KINETIC ENERGY", "POTENTIAL, THEN KINETIC"],
+          "answer_key": "B",
+          "answer_display": "KINETIC ENERGY",
+          "explanation": "Moving object → kinetic energy: kinetic energy is the energy of motion.",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 1 · built on Textbook Task 3 (still = potential, moving = kinetic)"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "SITUATION 4 / 5",
+          "context": "A box is resting on top of a tall cabinet.",
+          "prompt": "What energy does it have?",
+          "options": ["POTENTIAL ENERGY", "KINETIC ENERGY", "POTENTIAL, THEN KINETIC"],
+          "answer_key": "A",
+          "answer_display": "POTENTIAL ENERGY",
+          "explanation": "Still, and high up → potential energy: stored energy linked to its position.",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 1 · built on Textbook Task 3 (still = potential, moving = kinetic)"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "SITUATION 5 / 5",
+          "context": "A ball at the top of a ramp is released and rolls down.",
+          "prompt": "What energy does it have?",
+          "options": ["POTENTIAL ENERGY", "KINETIC ENERGY", "POTENTIAL, THEN KINETIC"],
+          "answer_key": "C",
+          "answer_display": "POTENTIAL, THEN KINETIC",
+          "explanation": "Still, then moving: potential energy becomes kinetic energy. Remember this change — it is exactly what the crash report describes.",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 1 · built on Textbook Task 3 (still = potential, moving = kinetic)"
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "code": "02",
+      "slug": "vocabulary-battle",
+      "title": "VOCABULARY BATTLE",
+      "objective": "Use the ten Unit 5 engineering words accurately.",
+      "briefing": "Ten words from the textbook. Complete the sentences and match the definitions.",
+      "default_duration": 25,
+      "questions": [
+        {
+          "kind": "SINGLE",
+          "label": "WORD 1 / 8",
+          "context": "Drivers ______ when they press the brakes.",
+          "prompt": "Complete the sentence.",
+          "options": ["decelerate", "transfer", "work", "force"],
+          "answer_key": "A",
+          "answer_display": "decelerate",
+          "explanation": "Decelerate = to reduce speed (to slow down). Textbook example: “Drivers decelerate when they press the brakes.”",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 3, item 1"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "WORD 2 / 8",
+          "context": "The ______ of this car is dangerously long.",
+          "prompt": "Complete the sentence.",
+          "options": ["force", "potential energy", "stopping distance", "abstract"],
+          "answer_key": "C",
+          "answer_display": "stopping distance",
+          "explanation": "Stopping distance = the distance a vehicle travels before it stops. Textbook example: “The stopping distance of this car is dangerously long.”",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 3, item 1"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "WORD 3 / 8",
+          "context": "A still object has ______. A moving object has ______.",
+          "prompt": "Complete both sentences.",
+          "options": [
+            "potential energy / kinetic energy",
+            "kinetic energy / potential energy",
+            "force / work",
+            "work / force"
+          ],
+          "answer_key": "A",
+          "answer_display": "potential energy / kinetic energy",
+          "explanation": "Textbook rule: “A still object has potential energy. A moving object has kinetic energy.”",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 3, item 2"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "WORD 4 / 8",
+          "context": "When you kick a ball, the ______ moves it forward.",
+          "prompt": "Complete the sentence.",
+          "options": ["work", "force", "transfer", "G"],
+          "answer_key": "B",
+          "answer_display": "force",
+          "explanation": "Force = a push or a pull that makes an object move. Textbook example: “When you kick a ball, the force moves it forward.”",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 3, item 3"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "WORD 5 / 8",
+          "context": "A machine does ______ when it moves another object.",
+          "prompt": "Complete the sentence.",
+          "options": ["G", "abstract", "transfer", "work"],
+          "answer_key": "D",
+          "answer_display": "work",
+          "explanation": "Work is what a force does when it moves an object. Textbook example: “A machine does work when it moves another object.” No movement → no work.",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 3, item 3"
+        },
+        {
+          "kind": "MATCH",
+          "label": "WORD 6 / 8 · MATCHING",
+          "context": "Task 4 — four words, four definitions.",
+          "prompt": "Match each word with its definition.",
+          "items": [
+            {"key": "1", "text": "abstract"},
+            {"key": "2", "text": "work-energy principle"},
+            {"key": "3", "text": "G"},
+            {"key": "4", "text": "transfer"}
+          ],
+          "options": [
+            "a summary of an article, document, or other text",
+            "to move from one object to another",
+            "the unit of force that equals the force of gravity",
+            "the idea that a moving object's energy equals the distance it moves"
+          ],
+          "answer_key": {"1": "A", "2": "D", "3": "C", "4": "B"},
+          "answer_display": "1 → A · 2 → D · 3 → C · 4 → B",
+          "explanation": "abstract = a summary of an article, document, or other text · work-energy principle = the idea that a moving object's energy equals the distance it moves · G = the unit of force that equals the force of gravity · transfer = to move from one object to another. All four must be correct to score.",
+          "clarification": "Science note (supplementary): the textbook's definition of the work-energy principle is simplified. In standard physics, the work done by a force equals the change in an object's kinetic energy (work = force × distance). That is why spreading the same energy over a longer stopping distance means a smaller force.",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 4 (words and definitions A–D verbatim)",
+          "duration": 45
+        },
+        {
+          "kind": "SINGLE",
+          "label": "WORD 7 / 8",
+          "context": "“Tests show that stretching seatbelts reduce the force and ______ that passengers feel.”",
+          "prompt": "Complete the sentence from the abstract.",
+          "options": ["Gs", "work", "stopping distance", "transfers"],
+          "answer_key": "A",
+          "answer_display": "Gs",
+          "explanation": "G is the unit of force that equals the force of gravity. The Results section says stretching seatbelts reduce the force and Gs that passengers feel.",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook abstract — Results (gap added for the game)"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "WORD 8 / 8",
+          "context": "“Instead, most of the passenger's kinetic energy ______ to the belt.”",
+          "prompt": "Complete the sentence from the abstract.",
+          "options": ["decelerates", "transfers", "stops", "works"],
+          "answer_key": "B",
+          "answer_display": "transfers",
+          "explanation": "Transfer = to move from one object to another. Here, energy moves from the passenger to the belt.",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook abstract — Conclusions (gap added for the game)"
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "code": "03",
+      "slug": "crash-detective",
+      "title": "CRASH DETECTIVE",
+      "objective": "Check your understanding of the Stretching Seatbelt Test abstract.",
+      "briefing": "Background · Results · Conclusions. Decide whether each statement about the test is true or false.",
+      "default_duration": 35,
+      "questions": [
+        {
+          "kind": "TRUE_FALSE",
+          "label": "STATEMENT 1 / 7 · TEXTBOOK",
+          "context": "“Kinetic energy becomes potential energy in a crash.”",
+          "prompt": "True or false?",
+          "options": ["TRUE", "FALSE"],
+          "answer_key": "B",
+          "answer_display": "FALSE",
+          "explanation": "The abstract says the opposite: “In a crash, a car decelerates quickly. This causes the passengers' potential energy to become kinetic energy.”",
+          "clarification": "Science note (supplementary): this is the textbook's simplified wording. In standard physics, a passenger riding in a moving car already has kinetic energy; in a crash that kinetic energy has to be absorbed — and the stretching belt absorbs most of it. For this unit, answer with the textbook's wording.",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 2, item 1 (reworded for True/False)"
+        },
+        {
+          "kind": "TRUE_FALSE",
+          "label": "STATEMENT 2 / 7 · TEXTBOOK",
+          "context": "“Shorter stopping distances exert less force on people.”",
+          "prompt": "True or false?",
+          "options": ["TRUE", "FALSE"],
+          "answer_key": "B",
+          "answer_display": "FALSE",
+          "explanation": "A slightly GREATER stopping distance exerts LESS force. Shorter distance = more force. Abstract: “The work-energy principle shows that a slightly greater stopping distance exerts less force on passengers.”",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 2, item 2 (reworded for True/False)"
+        },
+        {
+          "kind": "TRUE_FALSE",
+          "label": "STATEMENT 3 / 7 · TEXTBOOK",
+          "context": "“Stretching seatbelts cause less work to be done on people.”",
+          "prompt": "True or false?",
+          "options": ["TRUE", "FALSE"],
+          "answer_key": "A",
+          "answer_display": "TRUE",
+          "explanation": "Conclusions: “The new seatbelts reduce injuries. This is because less work is done on passengers.”",
+          "source": "TEXTBOOK",
+          "source_reference": "Textbook Task 2, item 3"
+        },
+        {
+          "kind": "TRUE_FALSE",
+          "label": "STATEMENT 4 / 7 · REVISION",
+          "context": "“Stretching the seatbelt increases the stopping distance.”",
+          "prompt": "True or false?",
+          "options": ["TRUE", "FALSE"],
+          "answer_key": "A",
+          "answer_display": "TRUE",
+          "explanation": "Background: “With non-stretching seatbelts, the passenger's stopping distance is short. Stretching seatbelts increase this distance.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Revision statement built on the abstract (Background)"
+        },
+        {
+          "kind": "TRUE_FALSE",
+          "label": "STATEMENT 5 / 7 · REVISION",
+          "context": "“The tests showed an increase in Gs.”",
+          "prompt": "True or false?",
+          "options": ["TRUE", "FALSE"],
+          "answer_key": "B",
+          "answer_display": "FALSE",
+          "explanation": "Results: “Tests show that stretching seatbelts reduce the force and Gs that passengers feel.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Revision statement built on the abstract (Results)"
+        },
+        {
+          "kind": "TRUE_FALSE",
+          "label": "STATEMENT 6 / 7 · REVISION",
+          "context": "“With non-stretching seatbelts, the stopping distance is long.”",
+          "prompt": "True or false?",
+          "options": ["TRUE", "FALSE"],
+          "answer_key": "B",
+          "answer_display": "FALSE",
+          "explanation": "Background: with non-stretching seatbelts the passenger's stopping distance is SHORT.",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Revision statement built on the abstract (Background)"
+        },
+        {
+          "kind": "TRUE_FALSE",
+          "label": "STATEMENT 7 / 7 · REVISION",
+          "context": "“Most of the passenger's kinetic energy transfers to the belt.”",
+          "prompt": "True or false?",
+          "options": ["TRUE", "FALSE"],
+          "answer_key": "A",
+          "answer_display": "TRUE",
+          "explanation": "Conclusions: “Instead, most of the passenger's kinetic energy transfers to the belt.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Revision statement built on the abstract (Conclusions)"
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "code": "04",
+      "slug": "error-404",
+      "title": "ERROR 404: ENGINEER ENGLISH",
+      "objective": "Repair sentences using comparatives, can, be going to, present continuous and the passive.",
+      "briefing": "ENGINEER.EXE is speaking bad English. Find the correct repair for each broken sentence.",
+      "default_duration": 30,
+      "questions": [
+        {
+          "kind": "SINGLE",
+          "label": "BUG 1 / 5 · CAN",
+          "context": "✗ We can to make it safer.",
+          "prompt": "Select the correct repair.",
+          "options": ["We can make it safer.", "We can making it safer.", "We can makes it safer.", "We cans make it safer."],
+          "answer_key": "A",
+          "answer_display": "We can make it safer.",
+          "explanation": "CAN + BASE VERB (no ‘to’, no ‘-s’, no ‘-ing’). Seen in the textbook: “How can you do that?”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 4, bug 1 · structure from Task 8 language box"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "BUG 2 / 5 · COMPARATIVE",
+          "context": "✗ The new seatbelt is more safer.",
+          "prompt": "Select the correct repair.",
+          "options": ["The new seatbelt is most safer.", "The new seatbelt is safer.", "The new seatbelt is more safely.", "The new seatbelt is safer more."],
+          "answer_key": "B",
+          "answer_display": "The new seatbelt is safer.",
+          "explanation": "Short adjective → -ER (never ‘more’ + -er): safe → safer, long → longer, great → greater. Seen in the textbook: “safer than our current models”.",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 4, bug 2 · structure from Task 7/8"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "BUG 3 / 5 · BE GOING TO",
+          "context": "✗ We going to test it.",
+          "prompt": "Select the correct repair.",
+          "options": ["We going to testing it.", "We are go to test it.", "We're going to test it.", "We're going to tested it."],
+          "answer_key": "C",
+          "answer_display": "We're going to test it.",
+          "explanation": "BE + GOING TO + BASE VERB — don't forget ‘be’. It expresses a plan or intention. Seen in the textbook: “Are you going to make the seatbelts stretch more?”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 4, bug 3 · structure from Task 8 language box"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "BUG 4 / 5 · PRESENT CONTINUOUS",
+          "context": "✗ We're test it next week.",
+          "prompt": "Select the correct repair.",
+          "options": ["We're tests it next week.", "We testing it next week.", "We're tested it next week.", "We're testing it next week."],
+          "answer_key": "D",
+          "answer_display": "We're testing it next week.",
+          "explanation": "Present continuous for a fixed future arrangement = BE + VERB-ING (+ time expression). Seen in the textbook: “We're testing it next week.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 4, bug 4 · structure from Task 7"
+        },
+        {
+          "kind": "SINGLE",
+          "label": "BUG 5 / 5 · PASSIVE",
+          "context": "✗ Energy will transferred to the belt.",
+          "prompt": "Select the correct repair.",
+          "options": ["Energy will be transferred to the belt.", "Energy will be transfer to the belt.", "Energy will transferring to the belt.", "Energy will is transferred to the belt."],
+          "answer_key": "A",
+          "answer_display": "Energy will be transferred to the belt.",
+          "explanation": "Future passive = WILL + BE + PAST PARTICIPLE. The focus is on the energy, not on who acts. Seen in the textbook: “…will be transferred to the belt.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Game 4, bug 5 · structure from Task 7"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "code": "05",
+      "slug": "final-crash-simulation",
+      "title": "FINAL CRASH SIMULATION",
+      "objective": "Restore the correct engineering sequence.",
+      "briefing": "System requires correct sequence. Put the four events of the stretching-seatbelt crash in order. Worth 300 EP.",
+      "default_duration": 60,
+      "is_final": true,
+      "questions": [
+        {
+          "kind": "ORDER",
+          "label": "FINAL BOSS · 300 EP",
+          "context": "SYSTEM REQUIRES CORRECT SEQUENCE.",
+          "prompt": "Put the four events in the correct order.",
+          "options": ["FORCE ON PASSENGER DECREASES", "SEATBELT STRETCHES", "INJURIES DECREASE", "STOPPING DISTANCE INCREASES"],
+          "answer_key": ["B", "D", "A", "C"],
+          "answer_display": "SEATBELT STRETCHES → STOPPING DISTANCE INCREASES → FORCE ON PASSENGER DECREASES → INJURIES DECREASE",
+          "explanation": "The whole discovery, in order. Abstract: “Stretching seatbelts increase this distance. … A slightly greater stopping distance exerts less force on passengers. … The new seatbelts reduce injuries.”",
+          "source": "SUPPLEMENTARY",
+          "source_reference": "Deck Final Boss · sequence taken from the textbook abstract",
+          "points": 300
+        }
+      ]
+    }
+  ]
+}

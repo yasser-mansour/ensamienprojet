@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Projector · {{ session.code }}{% endblock %}
+{% block body_class %}display{% endblock %}
+{% block body %}
+<header class="d-top">
+  {% include "partials/brand.html" %}
+  <div class="d-top__right">
+    <span id="d-top-mission"></span>
+    <span>{{ join_host }}</span>
+    <span>CODE <span class="d-code-mini">{{ session.code }}</span></span>
+  </div>
+</header>
+<main class="d-main" id="stage" aria-live="polite"></main>
+<footer class="d-foot">
+  <span>ENSAMien · ENERGY LAB LIVE</span>
+  <div class="d-progress" id="d-progress"></div>
+  <span id="d-foot-right">UNIT 5 · ENERGY</span>
+</footer>
+<div class="d-offline" id="d-offline" hidden>RECONNECTING TO MISSION CONTROL…</div>
+<button class="btn btn--sm d-fs" id="fs-btn" type="button">Fullscreen (F)</button>
+<template id="qr-tpl">{{ qr_svg|safe }}</template>
+{% endblock %}
+{% block scripts %}
+<script type="module" src="{% static 'js/display.js' %}" id="display-script" data-state-url="{{ state_url }}" data-join-host="{{ join_host }}"></script>
+{% endblock %}

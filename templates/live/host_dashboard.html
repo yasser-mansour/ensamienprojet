@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Host dashboard{% endblock %}
+{% block body %}
+{% include "live/_host_nav.html" %}
+<main class="page">
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">ENSAMien · Mission control</p>
+      <h1 style="font-size:44px;margin-top:6px">ENERGY LAB LIVE</h1>
+    </div>
+    <form method="post" action="{% url 'live:host_create_session' %}" id="create-form">
+      {% csrf_token %}
+      <button class="btn btn--primary btn--xl" type="submit" id="create-btn">Create new session</button>
+    </form>
+  </div>
+  <div class="hazard" style="margin-bottom:22px"></div>
+
+  {% if active_sessions %}
+    <p class="panel__title" style="margin-bottom:10px">Active sessions</p>
+    <div class="cards">
+      {% for s in active_sessions %}
+      <a class="panel session-card corners" href="{% url 'live:host_control' s.pk %}" style="color:inherit;text-decoration:none">
+        <div class="stat__label">Session code</div>
+        <div class="session-card__code">{{ s.code }}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="tag tag--amber">{{ s.get_status_display }}</span>
+          <span class="tag">{{ s.team_count }} / 10 teams</span>
+          {% if s.registration_open %}<span class="tag tag--ok">Registration open</span>{% endif %}
+        </div>
+        <div class="dim" style="font-size:13px">Created {{ s.created_at|date:"D d M · H:i" }}</div>
+        <span class="btn btn--block">Open mission control →</span>
+      </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="panel corners" style="padding:48px 24px;text-align:center">
+      <p class="eyebrow">Status</p>
+      <h2 style="font-size:36px;margin:8px 0 10px">No active session</h2>
+      <p class="muted" style="margin:0">Create a session to generate a six-digit code for the teams.</p>
+    </div>
+  {% endif %}
+
+  <div class="page-head" style="margin-top:40px">
+    <p class="panel__title">Recent sessions</p>
+    <a class="narrow" href="{% url 'live:host_history' %}" style="font-size:13px">Full history →</a>
+  </div>
+  {% if past_sessions %}
+  <div class="panel table-wrap">
+    <table class="table">
+      <thead><tr><th>Date</th><th>Code</th><th>Status</th><th>Teams</th><th></th></tr></thead>
+      <tbody>
+      {% for s in past_sessions %}
+        <tr><td>{{ s.created_at|date:"d M Y · H:i" }}</td><td class="mono">{{ s.code }}</td><td>{{ s.get_status_display }}</td><td>{{ s.team_count }}</td><td><a href="{% url 'live:host_report' s.pk %}">Report →</a></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}<div class="panel empty">No finished sessions yet</div>{% endif %}
+</main>
+<script>
+  document.getElementById("create-form").addEventListener("submit", () => {
+    const b = document.getElementById("create-btn"); b.classList.add("is-busy"); setTimeout(() => (b.disabled = true));
+  });
+</script>
+{% endblock %}

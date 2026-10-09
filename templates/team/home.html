@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Join the mission{% endblock %}
+{% block body %}
+<div class="mobile">
+  <header class="mobile__top">
+    {% include "partials/brand.html" %}
+    <span class="tag tag--amber">LIVE</span>
+  </header>
+  <main class="mobile__main">
+    <p class="eyebrow">ENSAMien · Interactive classroom</p>
+    <h1 class="hero-title" style="margin:10px 0 28px">ENERGY LAB<span>CRASH TEST #05</span></h1>
+
+    <form method="post" action="{% url 'live:home' %}" id="code-form" novalidate>
+      {% csrf_token %}
+      {% if error %}<div class="alert" role="alert">{{ error }}</div>{% endif %}
+      <div class="field" style="margin-bottom:0">
+        <label for="code-0">Enter your access code</label>
+      </div>
+      <div class="code-input" data-code-input>
+        {% for i in "012345" %}
+        <input id="code-{{ i }}" inputmode="numeric" pattern="[0-9]*" autocomplete="{% if forloop.first %}one-time-code{% else %}off{% endif %}" aria-label="Digit {{ forloop.counter }}">
+        {% endfor %}
+      </div>
+      <input type="hidden" name="code" id="code-value">
+      <noscript><input class="input" name="code" inputmode="numeric" maxlength="6" placeholder="6-digit code" style="margin-bottom:18px"></noscript>
+      <button class="btn btn--primary btn--xl btn--block" type="submit" id="join-btn">Join session</button>
+    </form>
+  </main>
+  <footer class="mobile__foot">One phone per team · Your captain answers for the company</footer>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{% static 'js/codeinput.js' %}"></script>{% endblock %}

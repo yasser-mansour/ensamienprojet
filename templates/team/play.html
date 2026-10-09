@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ team.name }}{% endblock %}
+{% block body %}
+<div class="mobile">
+  <header class="mobile__top">
+    {% include "partials/brand.html" %}
+    <div class="team-chip">
+      <span class="team-chip__name" id="team-name">{{ team.name }}</span>
+      <span class="team-chip__score" id="team-score">— EP</span>
+    </div>
+  </header>
+  <div class="status-strip" style="padding:10px 0 0" aria-live="polite">
+    <span class="dot dot--wait" id="conn-dot"></span><span id="conn-text">CONNECTING…</span>
+    <span style="margin-left:auto" id="mission-tag"></span>
+  </div>
+  <main class="mobile__main" id="app" style="justify-content:flex-start;padding-top:18px" aria-live="polite"></main>
+  <footer class="mobile__foot">ENSAMien · ENERGY LAB LIVE</footer>
+</div>
+<form method="post" action="{% url 'live:leave' %}" id="leave-form" hidden>{% csrf_token %}</form>
+{% endblock %}
+{% block scripts %}
+<script type="module" src="{% static 'js/play.js' %}" data-state-url="{% url 'live:api_team_state' %}" data-submit-url="{% url 'live:api_team_submit' %}" data-home-url="{% url 'live:home' %}" id="play-script"></script>
+{% endblock %}

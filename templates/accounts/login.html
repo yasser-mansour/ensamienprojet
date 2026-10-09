@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Host sign in{% endblock %}
+{% block body %}
+<div class="mobile" style="max-width:460px">
+  <header class="mobile__top">
+    {% include "partials/brand.html" %}
+    <span class="tag">HOST</span>
+  </header>
+  <main class="mobile__main">
+    <div class="panel corners" style="padding:28px 24px">
+      <p class="eyebrow">Mission control · restricted</p>
+      <h1 style="font-size:34px;margin:8px 0 24px">Host sign in</h1>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% if error %}<div class="alert" role="alert">{{ error }}</div>{% endif %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="field">
+          <label for="email">Email</label>
+          <input class="input" type="email" id="email" name="email" value="{{ form.email.value|default_if_none:'' }}" autocomplete="username" required autofocus>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input class="input" type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn--primary btn--xl btn--block" type="submit">Sign in</button>
+      </form>
+    </div>
+  </main>
+  <footer class="mobile__foot">ENSAMien · ENERGY LAB LIVE</footer>
+</div>
+{% endblock %}

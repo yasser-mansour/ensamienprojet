@@ -1,0 +1,4 @@
+-r requirements.txt
+# Browser end-to-end test and load test (tools/e2e.py, tools/loadtest.py)
+playwright==1.63.0
+requests>=2.32

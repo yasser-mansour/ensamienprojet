@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Reconnect your team{% endblock %}
+{% block body %}
+<div class="mobile">
+  <header class="mobile__top">
+    {% include "partials/brand.html" %}
+    <span class="tag">SESSION <span class="mono amber">{{ code }}</span></span>
+  </header>
+  <main class="mobile__main">
+    <p class="eyebrow">Team recovery</p>
+    <h1 class="stage__big" style="margin:10px 0 16px">Reconnect<br>your team</h1>
+    <p class="muted" style="margin:0 0 24px">Ask the host for your team's one-time recovery code. It moves your team, score and progress to this phone. The old phone will be disconnected.</p>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if error %}<div class="alert" role="alert">{{ error }}</div>{% endif %}
+      <div class="field">
+        <label for="recovery_code">Recovery code</label>
+        <input class="input input--big mono" id="recovery_code" name="recovery_code" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" required autofocus placeholder="XXXXXX" style="letter-spacing:.3em;text-align:center">
+      </div>
+      <button class="btn btn--primary btn--xl btn--block" type="submit">Reconnect team</button>
+    </form>
+  </main>
+  <footer class="mobile__foot"><a href="{% url 'live:join_team' %}">← Create a new team instead</a></footer>
+</div>
+{% endblock %}

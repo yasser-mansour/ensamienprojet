@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Please reload{% endblock %}
+{% block body %}
+<div class="mobile"><header class="mobile__top">{% include "partials/brand.html" %}</header>
+<main class="mobile__main"><p class="eyebrow">Security check</p><h1 class="stage__big" style="margin:10px 0 18px">Please reload the page</h1>
+<p class="muted">The form expired. Go back, reload, and try again.</p><p><a class="btn btn--primary" href="/">Start again</a></p></main></div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Report {{ session.code }}{% endblock %}
+{% block body %}
+{% include "live/_host_nav.html" %}
+<main class="page" style="max-width:1300px">
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Session report · {{ session.experience.title }}</p>
+      <h1 style="font-size:40px;margin-top:6px">Session <span class="mono amber">{{ session.code }}</span></h1>
+      <p class="muted" style="margin:6px 0 0">{{ session.created_at|date:"l d F Y · H:i" }} · {{ session.get_status_display }}{% if session.finished_at %} · finished {{ session.finished_at|date:"H:i" }}{% endif %}</p>
+    </div>
+    {% if session.status != "FINISHED" and session.status != "ARCHIVED" %}<a class="btn" href="{% url 'live:host_control' session.pk %}">Back to mission control</a>{% endif %}
+  </div>
+
+  <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:16px">
+    <div class="panel">
+      <div class="panel__head"><span class="panel__title">Final scores</span></div>
+      {% if board %}
+      <table class="table"><thead><tr><th>#</th><th>Team</th><th style="text-align:right">EP</th></tr></thead><tbody>
+      {% for row in board %}<tr><td class="amber">{{ row.rank }}</td><td>{{ row.name }}</td><td class="mono" style="text-align:right">{{ row.score }}</td></tr>{% endfor %}
+      </tbody></table>
+      {% else %}<div class="empty">No teams</div>{% endif %}
+    </div>
+    <div class="panel">
+      <div class="panel__head"><span class="panel__title">Mission results (correct / answered)</span></div>
+      <div class="table-wrap">
+      {% if mission_table %}
+      <table class="table"><thead><tr><th>Mission</th>{% for t in teams %}<th>{{ t.name }}</th>{% endfor %}</tr></thead><tbody>
+      {% for m in mission_table %}<tr><td><b class="amber">{{ m.mission.code }}</b> {{ m.mission.title }}</td>{% for c in m.cells %}<td class="mono">{{ c.correct }} / {{ c.answered }}</td>{% endfor %}</tr>{% endfor %}
+      </tbody></table>
+      {% else %}<div class="empty">No questions played</div>{% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-bottom:16px">
+    <div class="panel__head"><span class="panel__title">Questions asked · answers by team</span><span class="dim narrow" style="font-size:12px">✓ correct · ✗ incorrect · grey = not scored (skipped/unrevealed)</span></div>
+    <div class="table-wrap">
+    {% if rows %}
+    <table class="table">
+      <thead><tr><th>Question</th><th>Correct answer</th>{% for t in teams %}<th>{{ t.name }}{% if t.status == "REMOVED" %} <span class="dim">(removed)</span>{% endif %}</th>{% endfor %}</tr></thead>
+      <tbody>
+      {% for row in rows %}
+      <tr>
+        <td><b class="amber">{{ row.runtime.question.mission.code }}</b> {{ row.runtime.question.label }}<br><span class="dim" style="font-size:12px">{{ row.runtime.question.context|truncatechars:70 }}{% if row.runtime.attempt > 1 %} · attempt {{ row.runtime.attempt }}{% endif %} · {{ row.runtime.get_status_display }}</span></td>
+        <td style="font-size:13px">{{ row.runtime.question.answer_display }}</td>
+        {% for c in row.cells %}
+          <td style="font-size:13px" class="{% if c.answer and c.counted %}{% if c.correct %}cell-ok{% else %}cell-bad{% endif %}{% else %}dim{% endif %}">{% if c.answer %}{% if c.correct %}✓{% else %}✗{% endif %} {{ c.answer|truncatechars:40 }}{% else %}—{% endif %}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<div class="empty">No questions were played in this session</div>{% endif %}
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px">
+    <div class="panel">
+      <div class="panel__head"><span class="panel__title">Manual score adjustments</span></div>
+      {% if manual_events %}
+      <table class="table"><thead><tr><th>Time</th><th>Team</th><th>EP</th><th>Reason</th><th>By</th></tr></thead><tbody>
+      {% for e in manual_events %}<tr><td>{{ e.created_at|date:"H:i:s" }}</td><td>{{ e.team.name }}</td><td class="mono {% if e.points > 0 %}cell-ok{% else %}cell-bad{% endif %}">{{ e.points|stringformat:"+d" }}</td><td>{{ e.reason }}</td><td class="dim">{{ e.created_by.email|default:"—" }}</td></tr>{% endfor %}
+      </tbody></table>
+      {% else %}<div class="empty">None</div>{% endif %}
+    </div>
+    <div class="panel">
+      <div class="panel__head"><span class="panel__title">Event log</span></div>
+      <div class="log" style="max-height:420px">
+        {% for e in events %}<div class="log__row"><span class="log__time">{{ e.created_at|date:"H:i:s" }}</span><span>{{ e.message }}</span></div>{% empty %}<div class="empty">No events</div>{% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
