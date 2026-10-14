@@ -1,0 +1,184 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "master page count",
+      "pass": true
+    },
+    {
+      "check": "88 slide owners",
+      "pass": true
+    },
+    {
+      "check": "contiguous 105 minute timeline",
+      "pass": true
+    },
+    {
+      "check": "five mission counts",
+      "pass": true
+    },
+    {
+      "check": "P1 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P1 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P2 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P2 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P3 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P3 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P4 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P4 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P5 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P5 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P6 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P6 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P7 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P7 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P8 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P8 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "P9 exact text extraction",
+      "pass": true
+    },
+    {
+      "check": "P9 identical rendered page pixels",
+      "pass": true
+    },
+    {
+      "check": "nine one-page quick cards",
+      "pass": true
+    },
+    {
+      "check": "P1 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P2 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P3 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P4 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P5 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P6 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P7 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P8 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "P9 quick card matches master",
+      "pass": true
+    },
+    {
+      "check": "font descriptors embedded",
+      "pass": true
+    },
+    {
+      "check": "text stays inside page margins",
+      "pass": true
+    },
+    {
+      "check": "rendered text uses embedded Arial fonts",
+      "pass": true
+    },
+    {
+      "check": "no replacement or DEL glyphs",
+      "pass": true
+    },
+    {
+      "check": "source checksum docs/operations/source/ENERGY_LAB_PRESENTER_GUIDE.pdf",
+      "pass": true
+    },
+    {
+      "check": "source checksum docs/operations/source/ENERGY_LAB_STUDENT_DOSSIER.pdf",
+      "pass": true
+    },
+    {
+      "check": "source checksum docs/operations/source/ENERGY_LAB_UNIT5.pptx",
+      "pass": true
+    },
+    {
+      "check": "source checksum docs/operations/source/listening_fallback.md",
+      "pass": true
+    },
+    {
+      "check": "source checksum docs/operations/source/quiz_questions.md",
+      "pass": true
+    },
+    {
+      "check": "fixture unchanged",
+      "pass": true
+    }
+  ],
+  "master_pages": 85,
+  "fonts": [
+    "Arial-BoldMT",
+    "ArialMT"
+  ],
+  "limitations": [
+    "No original manual QA script recovered; this script is newly added.",
+    "Geometry cannot alone certify layout; representative render review required.",
+    "No live deployed application or classroom acceptance test performed.",
+    "Original textbook and official audio unavailable."
+  ]
+}
